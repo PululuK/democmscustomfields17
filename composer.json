@@ -1,0 +1,22 @@
+{
+    "name": "pululuk/democmscustomfields17",
+    "description": "Demo cms custom field PS 17 ",
+    "autoload": {
+        "psr-4": {
+            "PrestaShop\\Module\\Democmscustomfields17\\": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "prepend-autoloader": false
+    },
+    "type": "prestashop-module",
+    "license": "MIT",
+    "authors": [{
+        "name": "PululuK",
+        "email": "pululuandre@hotmail.com"
+    }],
+    "require": {
+        "php": ">=5.6.0"
+    }
+}
