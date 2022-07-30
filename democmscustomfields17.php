@@ -4,6 +4,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+require_once __DIR__.'/vendor/autoload.php';
+
 use \PrestaShop\PrestaShop\Core\Module\Exception\ModuleErrorException;
 use PrestaShop\Module\Democmscustomfields17\Form\Cms\CustomFieldsForm as CmsCustomFieldsForm;
 use Symfony\Component\Form\FormBuilderInterface;
