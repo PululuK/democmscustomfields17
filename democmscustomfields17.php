@@ -113,7 +113,13 @@ class Democmscustomfields17 extends Module
     public function hookFilterCmsContent($params)
     {
         $idCms = (int) $params['object']['id'];
-        $cmsCustomFields = $this->cmsCustomFieldsHandler->getData($idCms);
+
+        $cmsCustomFields = $this->cmsCustomFieldsHandler->getData([
+            'id_cms' => $idCms,
+            'id_lang' => (int) $this->context->language->id,
+            'id_shop' => (int) $this->context->shop->id
+        ]);
+
         $params['object'] = array_merge($cmsCustomFields, $params['object']);
 
         return [
