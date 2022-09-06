@@ -44,7 +44,7 @@ class Democmscustomfields17 extends Module
             'actionCMSPageFormBuilderModifier',
             'actionAfterCreateCMSPageFormHandler',
             'actionAfterUpdateCMSPageFormHandler',
-            'actionFrontControllerSetVariables',
+            'filterCmsContent',
             'actionObjectCmsDeleteAfter',
         ];
     }
@@ -110,12 +110,20 @@ class Democmscustomfields17 extends Module
         $this->cmsCustomFieldsHandler->saveData($formData);
     }
 
-    public function hookActionFrontControllerSetVariables()
+    public function hookFilterCmsContent($params)
     {
-        if(is_a($this->context->controller, CmsController::class)){            
-            return $this->cmsCustomFieldsHandler->getData([
-                'id_cms' => (int) Tools::getValue('id_cms'),
-            ]);
-        }
+        $idCms = (int) $params['object']['id'];
+
+        $cmsCustomFields = $this->cmsCustomFieldsHandler->getData([
+            'id_cms' => $idCms,
+            'id_lang' => (int) $this->context->language->id,
+            'id_shop' => (int) $this->context->shop->id
+        ]);
+
+        $params['object'] = array_merge($cmsCustomFields, $params['object']);
+
+        return [
+            'object' => $params['object'],
+        ];
     }
 }
